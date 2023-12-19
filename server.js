@@ -151,9 +151,11 @@ app.get('/incorrect', requireAuth, (req, res) => {
 
 
 app.post('/register', async (req, res) => {
-    const { email, password, first_name, last_name, contact_no } = req.body;
+    let { email, password, first_name, last_name, contact_no } = req.body;
     const vehicle_id = ""; // Set default value for vehicle_id
     const rfid_id = ""; // Set default value for rfid_id
+    email = email.trim();
+    password = password.trim();
     try {
         const isUsernameTaken = await User.exists({ email: email });
 
